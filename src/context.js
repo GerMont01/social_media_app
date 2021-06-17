@@ -5,7 +5,8 @@ export const Consumer = Context.Consumer;
 
 const reducer = (state, action) => {
     switch (action.type) {
-      case "":
+      case "NEW_POST":
+        console.log(action.payload)
         return {
           ...state
         };
