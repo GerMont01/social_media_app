@@ -42,7 +42,7 @@ export default function Feed() {
           <>
           {value.posts.map((post)=>
             <>
-            <div>
+            <div key={post.id}>
                 <h1>{post.title}</h1>
                 <img src={post.image} width='200px'/>
                 <img src={Like} onClick={(e)=>addLike(e,post.id,post.likes,dispatch)}/>   
