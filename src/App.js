@@ -1,4 +1,5 @@
 import './App.css';
+import "./Styles/styles.css"
 
 import Feed from "./Feed/feed";
 import Post from "./Post/post";
