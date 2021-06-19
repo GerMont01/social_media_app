@@ -5,7 +5,53 @@ import Like from '../icons/heart.svg';
 import Comment from './Comment/comment';
 import uuid from 'react-uuid';
 import Close from "../icons/x.svg";
+import styled from 'styled-components';
 
+const Container = styled.div`
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Div = styled.div`
+  position: relative;
+  display: inherit;
+  flex-direction:column;
+  border: 1px solid rgb(225, 225, 208); 
+  border-radius: 5px;
+  margin: 20px;
+  padding: 20px 10px 20px 10px;
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  text-align: left;
+`;
+
+const Closebtn = styled.img`
+  position: absolute;
+  height:25px;
+  top: 15px;
+  right: 0;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+`;
+
+const Input = styled.input`
+  height: 25px;
+  padding-left: 10px;
+  border: 0.5px solid grey;
+  border-radius: 10px;
+  outline:none;
+  &:focus {
+    border-color:black;
+  }
+`;
 
 export default function Feed() {
   const [ toggleLike, setToggleLike ] = useState([]);
@@ -14,7 +60,7 @@ export default function Feed() {
   },[])
   const addComment = (id,content,dispatch) => {
     let comment = {
-      user: 'Juan',
+      user: 'User1',
       content: content,
       id: uuid()
     }
@@ -45,24 +91,29 @@ export default function Feed() {
       {(value) => {
         const { dispatch } = value;
         return (
-          value.posts.length !== 0 ? 
+          <Container>
+          {value.posts.length !== 0 ? 
           <>
           {value.posts.map((post)=>
             <>
-            <div key={post.id}>
-                <h1>{post.title}</h1>
-                <img src={post.image} width='200px'/>
-                <img src={Close} onClick={()=>deletePost(post.id,dispatch)}/>
-                <img src={Like} onClick={(e)=>addLike(e,post.id,post.likes,dispatch)}/>   
-                <p>{post.likes} likes</p>
-                <Comment post={post}/>                
-                <input type='text' placeholder='Add a comment' onKeyDown={(e)=>{if(e.key ==='Enter'){addComment(post.id,e.target.value,dispatch)}}}/>
-            </div>
+            <Div key={post.id}>
+              <Title>{post.title}</Title>
+              <img src={post.image} width='300px' height='400px' onClick={()=>document.getElementById('like').click()}/>
+              <Closebtn src={Close} onClick={()=>deletePost(post.id,dispatch)}/>
+              <div style={{margin:'10px'}}>
+                <img id='like' src={Like} onClick={(e)=>addLike(e,post.id,post.likes,dispatch)}/>   
+                <span> {post.likes} likes</span>
+                <span> {post.comments.length} Comments</span>
+              </div>
+              <Comment post={post}/>                
+              <Input type='text' placeholder='Add a comment' onKeyDown={(e)=>{if(e.key ==='Enter'){addComment(post.id,e.target.value,dispatch)}}}/>
+            </Div>
           </>
           )}
           </>
           :
-          <p>Post a Picture!</p>
+          <p>Post a Picture!</p>}
+          </Container>
         )
       }}
     </Consumer>
