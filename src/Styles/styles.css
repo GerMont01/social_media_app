@@ -1,0 +1,88 @@
+h1 {
+  text-align: center;
+}
+
+.postContainer {
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.postContainer .cp_iptxt {
+  position: relative;
+  width: 80%;
+  margin: 40px 3%;
+}
+
+.postContainer .cp_iptxt input[type='text'] {
+  font: 15px/24px sans-serif;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  letter-spacing: 1px;
+  padding-left: 4em;
+}
+
+.postContainer .cp_iptxt input[type='text']:focus {
+  outline: none;
+}
+
+.postContainer .ef {
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid #1b2538;
+  background-color: transparent;
+}
+
+.postContainer .ef:focus ~ .focus_line,
+.postContainer .cp_iptxt.ef ~ .focus_line {
+  left: 0;
+  width: 100%;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.postContainer .ef ~ label {
+  position: absolute;
+  z-index: -1;
+  top: 4px;
+  left: 0;
+  width: 100%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  letter-spacing: 0.5px;
+  color: #aaaaaa;
+}
+
+.postContainer .ef:focus ~ label, .postContainer .cp_iptxt.ef ~ label {
+  font-size: 12px;
+  top: -16px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  color: #5d67bb;
+}
+
+.postContainer .postButton {
+  border: 0.1em solid #FFFFFF;
+  padding: 0.35em 1.2em;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  color: #FFFFFF;
+  text-align: center;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  background-color: #5d67bb;
+  display: inline-block;
+}
+/*# sourceMappingURL=styles.css.map */

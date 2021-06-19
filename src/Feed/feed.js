@@ -39,6 +39,7 @@ export default function Feed() {
       {(value) => {
         const { dispatch } = value;
         return (
+          value.posts.length !== 0 ? 
           <>
           {value.posts.map((post)=>
             <>
@@ -47,12 +48,14 @@ export default function Feed() {
                 <img src={post.image} width='200px'/>
                 <img src={Like} onClick={(e)=>addLike(e,post.id,post.likes,dispatch)}/>   
                 <p>{post.likes} likes</p>
-                <Comment id={post.id}/>                
+                <Comment post={post}/>                
                 <input type='text' placeholder='Add a comment' onKeyDown={(e)=>{if(e.key ==='Enter'){addComment(post.id,e.target.value,dispatch)}}}/>
             </div>
           </>
           )}
           </>
+          :
+          <p>Post a Picture!</p>
         )
       }}
     </Consumer>
