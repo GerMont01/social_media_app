@@ -4,6 +4,8 @@ import { Consumer } from "../context";
 import Like from '../icons/heart.svg';
 import Comment from './Comment/comment';
 import uuid from 'react-uuid';
+import Close from "../icons/x.svg";
+
 
 export default function Feed() {
   const [ toggleLike, setToggleLike ] = useState([]);
@@ -34,6 +36,10 @@ export default function Feed() {
     }
     dispatch({ type:"ADD_LIKE", payload: {id,likes} })
   }
+  const deletePost = (id,dispatch) => {
+    console.log(id)
+    dispatch({ type:"DELETE_POST", payload: id })
+  }
   return (
     <Consumer>
       {(value) => {
@@ -46,6 +52,7 @@ export default function Feed() {
             <div key={post.id}>
                 <h1>{post.title}</h1>
                 <img src={post.image} width='200px'/>
+                <img src={Close} onClick={()=>deletePost(post.id,dispatch)}/>
                 <img src={Like} onClick={(e)=>addLike(e,post.id,post.likes,dispatch)}/>   
                 <p>{post.likes} likes</p>
                 <Comment post={post}/>                

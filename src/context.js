@@ -50,6 +50,12 @@ const reducer = (state, action) => {
         return {
           ...state
         };
+      case "DELETE_POST":
+        console.log(action.payload)
+        return {
+          ...state,
+          posts: state.posts.filter((post)=>post.id !== action.payload)
+        };
       default:
         return state;
     }
