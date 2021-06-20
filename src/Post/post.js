@@ -25,6 +25,7 @@ onSubmit = (dispatch, e) => {
     url,
     title
   };
+  dispatch({type:"NEW_POST", payload:newPost})
   localStorage.setItem('newPost', JSON.stringify(newPost)); //this is a object. He needs to convert to json when he fetch the data from local storage
 };
 
