@@ -106,7 +106,7 @@ export default function Feed() {
                 <span> {post.comments.length} Comments</span>
               </div>
               <Comment post={post}/>                
-              <Input type='text' placeholder='Add a comment' onKeyDown={(e)=>{if(e.key ==='Enter'){addComment(post.id,e.target.value,dispatch)}}}/>
+              <Input type='text' placeholder='Add a comment' onKeyDown={(e)=>{if(e.key ==='Enter'){addComment(post.id,e.target.value,dispatch);e.target.value='';}}}/>
             </Div>
           </>
           )}

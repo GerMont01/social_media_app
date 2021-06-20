@@ -38,8 +38,7 @@ onSubmit = (dispatch, e) => {
    }
    if(file){
         reader.readAsDataURL(file);
-    }else{
-    }
+  }
 }
 
 
