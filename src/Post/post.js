@@ -25,8 +25,9 @@ onSubmit = (dispatch, e) => {
     url,
     title
   };
-  dispatch({type:"NEW_POST", payload:newPost})
-  localStorage.setItem('newPost', JSON.stringify(newPost)); //this is a object. He needs to convert to json when he fetch the data from local storage
+  alert("You posted ")
+  dispatch({ type: "NEW_POST", payload: this.state });
+  // localStorage.setItem('newPost', JSON.stringify(newPost)); //this is a object. He needs to convert to json when he fetch the data from local storage
 };
 
  readURL(e){
@@ -38,8 +39,7 @@ onSubmit = (dispatch, e) => {
    }
    if(file){
         reader.readAsDataURL(file);
-    }else{
-    }
+  }
 }
 
 
@@ -51,17 +51,21 @@ onSubmit = (dispatch, e) => {
           <h1>Post New Picture</h1>
           <div className="postContainer">
           
-            <form onSubmit={this.onSubmit.bind(this, value.dispatch)}>
+            <form className="postContainer" onSubmit={this.onSubmit.bind(this, value.dispatch)}>
 
             <div className="imgContainer">
                <h4>Select pictures to upload</h4>
+               <p>{this.state.title}</p>
+            <img src={this.state.url}
+                    style={{ width: "500px" }}/>
+                    <br/>
                <input type="file" id="files" 
                onChange={(e) => this.readURL(e)}
                />
-               {/* <label for="file" >choose a file</label> */}
             </div>
 
             <div className="cp_iptxt titleContainer">
+              <div>
                <input className="ef"
                    type="text"
                    value={this.state.title}
@@ -71,22 +75,12 @@ onSubmit = (dispatch, e) => {
                  />
                  <label>Title</label>
                  <span className="focus_line"></span>
-                 <br/>
+                 </div>
+                 <div>
                <input className="postButton" type="submit" value="POST" />
+               </div>
             </div>
-            
-            {/* <div id="list">
-            {URIScheme && (
-                <img
-                  className="thumb"
-                  src={URIScheme}
-                  style={{ width: "600px" }}
-                />
-              )}
-            </div> */}
-            
             </form>
-            {/* <p>{value.posts}</p> */}
             </div>
           </>
         )}

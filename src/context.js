@@ -1,4 +1,5 @@
 import React from "react";
+import uuid from "react-uuid";
 
 const Context = React.createContext();
 export const Consumer = Context.Consumer;
@@ -8,17 +9,52 @@ const reducer = (state, action) => {
     done = true;
     switch (action.type) {
       case "NEW_POST":
-        console.log(action.payload)
-        break
+        const newPost = {
+          id: uuid(),
+          title: action.payload.title,
+          image: action.payload.url,
+          likes: 0,
+          comments: []
+        }
+        return {
+          ...state,
+          posts: [newPost, ...state.posts]
+        }
       case "ADD_COMMENT":
-        state.posts[action.payload.id].comments = [action.payload.comment, ...state.posts[action.payload.id].comments];
+        for (let post of state.posts) {
+          if (post.id === action.payload.id){
+            post.comments = [action.payload.comment, ...post.comments];
+          }
+        }
+        // state.posts[action.payload.id].comments = [action.payload.comment, ...state.posts[action.payload.id].comments];
         return {
           ...state
         };
       case "ADD_LIKE":
-        state.posts[action.payload.id].likes = action.payload.likes;
+        for (let post of state.posts) {
+          if (post.id === action.payload.id){
+            post.likes = action.payload.likes;
+          }
+        }
+        // state.posts[action.payload.id].likes = action.payload.likes;
         return {
           ...state
+        };
+      case "DELETE_COMMENT":
+        for (let post of state.posts) {
+          if (post.id === action.payload.postid){
+            let newComments = post.comments.filter((comment)=>comment.id !== action.payload.commentid);
+            post.comments = newComments
+          }
+        }
+        return {
+          ...state
+        };
+      case "DELETE_POST":
+        console.log(action.payload)
+        return {
+          ...state,
+          posts: state.posts.filter((post)=>post.id !== action.payload)
         };
       default:
         return state;
@@ -27,32 +63,31 @@ const reducer = (state, action) => {
 };
 export class Provider extends React.Component {
   state = {
-    posts: [{
-        id: 0,
-        title: 'Post 1',
-        image: 'https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340',
-        likes: 10,
-        comments: [{
-          user:'Gerardo',
-          content:'I like your picture!'
-        }]
-    },{
-      id: 1,
-        title: 'Post 2',
-        image: 'https://media.macphun.com/img/uploads/customer/how-to/579/15531840725c93b5489d84e9.43781620.jpg?q=85&w=1340',
-        likes: 15,
-        comments: [{
-          user:'Carlos',
-          content:'I dont like your picture!'
-        }]
-    }
-  ],
+    posts: [],
     dispatch: (action) => {
         this.setState((state) => reducer(state, action));
     }
   };
+  componentWillMount() {
+    this.getLocalStorage('posts') == null ? this.setState({posts: []}) : 
+    this.setState({posts: this.getLocalStorage('posts')});
+  }
   componentDidUpdate() {
     done = false;
+    this.setLocalStorage('posts',this.state.posts);
+  }
+  setLocalStorage = (key,value) => {
+    try {
+      let storeValue = JSON.stringify(value)
+      localStorage.setItem(key,storeValue);
+    }
+    catch(err) {
+      alert(err);
+    }
+    
+  }
+  getLocalStorage = (key)=> {
+    return JSON.parse(localStorage.getItem(key));
   }
   render() {
     return (
