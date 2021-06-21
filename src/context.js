@@ -26,7 +26,6 @@ const reducer = (state, action) => {
             post.comments = [action.payload.comment, ...post.comments];
           }
         }
-        // state.posts[action.payload.id].comments = [action.payload.comment, ...state.posts[action.payload.id].comments];
         return {
           ...state
         };
@@ -36,7 +35,6 @@ const reducer = (state, action) => {
             post.likes = action.payload.likes;
           }
         }
-        // state.posts[action.payload.id].likes = action.payload.likes;
         return {
           ...state
         };
@@ -51,7 +49,6 @@ const reducer = (state, action) => {
           ...state
         };
       case "DELETE_POST":
-        console.log(action.payload)
         return {
           ...state,
           posts: state.posts.filter((post)=>post.id !== action.payload)

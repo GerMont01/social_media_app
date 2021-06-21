@@ -3,9 +3,6 @@ import { Consumer } from "../context";
 
 
 export default class Post extends React.Component {
-//   deleteUser = (id, dispatch) => {
-//     dispatch({ type: "DELETE_CONTACT", payload: id });
-//   };7
 
 state = {
   url:"",
@@ -20,22 +17,15 @@ onChange = (e) => {
 
 onSubmit = (dispatch, e) => {
   e.preventDefault();
-  const { url, title } = this.state;
-  const newPost = {
-    url,
-    title
-  };
   alert("You posted ")
   dispatch({ type: "NEW_POST", payload: this.state });
-  // localStorage.setItem('newPost', JSON.stringify(newPost)); //this is a object. He needs to convert to json when he fetch the data from local storage
 };
 
- readURL(e){
-   var file = document.getElementById("files").files[0];
-   var reader = new FileReader();
+ readURL(){
+   const file = document.getElementById("files").files[0];
+   const reader = new FileReader();
    reader.onloadend = () => {
         this.setState({url: reader.result})
-        // localStorage.setItem('post',reader.result);  // save title to tttle, url to url and when you click "Post", save to the state in local storage    
    }
    if(file){
         reader.readAsDataURL(file);
@@ -57,10 +47,10 @@ onSubmit = (dispatch, e) => {
                <h4>Select pictures to upload</h4>
                <p>{this.state.title}</p>
             <img src={this.state.url}
-                    style={{ width: "500px" }}/>
+                    style={{ width:"300px" }}/>
                     <br/>
                <input type="file" id="files" 
-               onChange={(e) => this.readURL(e)}
+               onChange={() => this.readURL()}
                />
             </div>
 
