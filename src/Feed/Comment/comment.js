@@ -28,7 +28,7 @@ export default class Comment extends React.Component {
                                 <h5 style={{marginRight:'5px'}}>{comment.user}</h5>
                                 <p>{comment.content}</p>
                             </div>
-                            <img src={Close} onClick={()=>this.deleteComment(this.props.post.id,comment.id,value.dispatch)}/>
+                            <img src={Close} alt='close' onClick={()=>this.deleteComment(this.props.post.id,comment.id,value.dispatch)}/>
                         </Div>
                     )}
                     </>

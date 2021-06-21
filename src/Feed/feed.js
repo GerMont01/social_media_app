@@ -104,10 +104,10 @@ export default function Feed() {
             <>
             <Div key={post.id}>
               <Title>{post.title}</Title>
-              <img src={post.image} width='300px' height='400px' onClick={()=>addLike(document.getElementById('like'+post.id),post.id,post.likes,dispatch)}/>
+              <img src={post.image} width='300px' height='400px' alt={post.title} onClick={()=>addLike(document.getElementById('like'+post.id),post.id,post.likes,dispatch)}/>
               <Closebtn src={Close} onClick={()=>deletePost(post.id,dispatch)}/>
               <div style={{margin:'10px'}}>
-                <Img id={'like'+post.id} src={Like} onClick={(e)=>addLike(e.target,post.id,post.likes,dispatch)}/>   
+                <Img id={'like'+post.id} src={Like} alt='like' onClick={(e)=>addLike(e.target,post.id,post.likes,dispatch)}/>   
                 <span> {post.likes} likes</span>
                 <span> {post.comments.length} Comments</span>
               </div>

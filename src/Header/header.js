@@ -33,8 +33,8 @@ export default class Header extends React.Component {
           <HeaderDiv>
             <Logo>Social Media App</Logo>
             <Nav>
-              <Link style={{margin: '15px'}} to="/"><img src={home} height="30px"/></Link>
-              <Link style={{margin: '15px',marginTop:'21px'}} to="/post"><img src={Add} height="30px"/></Link>
+              <Link style={{margin: '15px'}} to="/"><img src={home} alt='home' height="30px"/></Link>
+              <Link style={{margin: '15px',marginTop:'21px'}} to="/post"><img src={Add} alt='Post' height="30px"/></Link>
             </Nav>
           </HeaderDiv>
           </>

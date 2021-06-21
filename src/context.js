@@ -65,7 +65,7 @@ export class Provider extends React.Component {
         this.setState((state) => reducer(state, action));
     }
   };
-  componentWillMount() {
+  componentDidMount() {
     this.getLocalStorage('posts') == null ? this.setState({posts: []}) : 
     this.setState({posts: this.getLocalStorage('posts')});
   }
